@@ -1647,10 +1647,12 @@
           showFeedback("error", "SCRIPT_URL is not configured.");
           return;
         }
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
         fetch(SCRIPT_URL, {
           method: "POST",
-          mode: "cors",
-          headers: { "Content-Type": "application/json" },
+          mode: "cors", // Ensure this is set to cors
+          headers: headers,
           body: JSON.stringify(data),
         })
           .then((res) => {
