@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Al Farhan Apparels - Order Form</title>
+    <style>
+      /* Root Variables (same as before) */
+      :root {
+        --brand-dark-brown: #5d3a1a;
+        --brand-light-brown: #c8a67f;
+        --input-bg: #f2ebe3;
+        --input-border: #ccc;
+        --focus-ring-color: rgba(93, 58, 26, 0.3);
+        --text-color: #333;
+        --label-color: #555;
+        --container-bg: #fff;
+        --body-bg: #f8f8f8;
+        --success-bg: #dff0d8;
+        --success-text: #3c763d;
+        --success-border: #d6e9c6;
+        --error-bg: #f2dede;
+        --error-text: #a94442;
+        --error-border: #ebccd1;
+        --button-green: #2ecc71;
+        --button-green-hover: #27ae60;
+        --remove-red: #e74c3c;
+        --remove-red-hover: #c0392b;
+      }
+      /* Base Styles (same as before) */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        background-color: var(--body-bg);
+        color: var(--text-color);
+        padding: 20px;
+      }
+      .order-form-container {
+        max-width: 1100px;
+        margin: 20px auto;
+        background-color: var(--container-bg);
+        padding: 30px 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e0e0e0;
+      }
+      .form-header {
+        text-align: center;
+        margin-bottom: 35px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 25px;
+      }
+      .form-header .logo {
+        display: inline-block;
+        font-size: 1.8em;
+        font-weight: bold;
+        background-color: var(--brand-dark-brown);
+        color: white;
+        padding: 8px 12px;
+        border: 2px solid #4a2e15;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        line-height: 1;
+      }
+      .form-header .company-name {
+        font-size: 2em;
+        color: var(--brand-dark-brown);
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+      .form-header .address {
+        font-size: 0.95em;
+        color: #666;
+        margin-bottom: 15px;
+      }
+      .form-header .contact-info {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        font-size: 0.9em;
+        color: #555;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+      }
+      .form-header .contact-info span {
+        margin: 5px 10px;
+      }
+      .form-section {
+        margin-bottom: 35px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid #eee;
+      }
+      .form-section:last-of-type {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 20px;
+      }
+      .form-section h2 {
+        font-size: 1.5em;
+        color: var(--brand-dark-brown);
+        margin-bottom: 20px;
+        border-bottom: 2px solid var(--brand-light-brown);
+        padding-bottom: 8px;
+        font-weight: 600;
+      }
+      .form-section h3 {
+        font-size: 1.2em;
+        color: #444;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+      .form-section h4 {
+        font-size: 1.1em;
+        color: var(--brand-dark-brown);
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #eee;
+        font-weight: 600;
+      }
+      .form-section h5 {
+        font-size: 1em;
+        color: #444;
+        margin-top: 15px;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+      .form-group {
+        margin-bottom: 18px;
+      }
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: var(--label-color);
+        font-size: 0.95em;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="number"],
+      input[type="date"],
+      input[type="file"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 5px;
+        border: 1px solid var(--input-border);
+        border-radius: 4px;
+        background-color: var(--input-bg);
+        color: var(--text-color);
+        font-size: 1em;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      input[type="file"] {
+        background-color: #fff;
+        padding: 8px 12px;
+        border-style: dashed;
+        cursor: pointer;
+      } /* Make file inputs pointer */
+      input[type="file"]::file-selector-button {
+        margin-right: 15px;
+        border: 1px solid var(--brand-light-brown);
+        padding: 6px 10px;
+        border-radius: 4px;
+        background-color: var(--brand-light-brown);
+        color: var(--brand-dark-brown);
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      input[type="file"]::file-selector-button:hover {
+        background-color: #b89572;
+      }
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: var(--brand-dark-brown);
+        box-shadow: 0 0 0 3px var(--focus-ring-color);
+      }
+      input:focus-visible,
+      textarea:focus-visible,
+      select:focus-visible {
+        outline: 2px solid var(--brand-dark-brown);
+        outline-offset: 1px;
+        box-shadow: none;
+      }
+      textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+      select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23777%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.7em top 50%;
+        background-size: 0.65em auto;
+        padding-right: 2.5em;
+      }
+      small {
+        display: block;
+        font-size: 0.85em;
+        color: #666;
+        margin-top: 2px;
+        line-height: 1.4;
+      }
+      /* Grid Layouts */
+      .grid-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0 25px;
+      }
+      @media (min-width: 650px) {
+        .grid-layout {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      /* Product Section Grid */
+      .product-section-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        align-items: start;
+      }
+      @media (min-width: 768px) {
+        .product-section-grid {
+          grid-template-columns: 1fr 2fr;
+        }
+      }
+      /* Product Selection Vertical */
+      .product-selection-vertical {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .product-item {
+        border: 1px solid #e0d8cc;
+        padding: 15px;
+        border-radius: 5px;
+        text-align: center;
+        background-color: #fff;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .product-item:has(input[type="checkbox"]:checked) {
+        background-color: #fef8f0;
+        border-color: var(--brand-light-brown);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+      .product-item img {
+        max-width: 100px;
+        height: 100px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto 10px auto;
+        border-radius: 4px;
+      }
+      .product-item .product-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+        cursor: pointer;
+      }
+      .product-item .product-label label {
+        margin-left: 8px;
+        margin-bottom: 0;
+        font-weight: 500;
+        display: inline;
+        color: var(--text-color);
+        cursor: pointer;
+      }
+      .product-item input[type="checkbox"] {
+        width: auto;
+        margin-bottom: 0;
+        accent-color: var(--brand-dark-brown);
+        cursor: pointer;
+      }
+      .quantity-container {
+        display: none;
+        margin-top: auto;
+        padding-top: 10px;
+        border-top: 1px dashed #eee;
+      }
+      .quantity-container label {
+        font-size: 0.9em;
+        margin-bottom: 3px;
+        font-weight: bold;
+        color: #5c4a30;
+      }
+      .quantity-container input[type="number"] {
+        padding: 8px;
+        margin-bottom: 0;
+        font-size: 0.95em;
+      }
+      /* Dynamic Size Guides */
+      #shirt-size-chart-section,
+      #racing-suit-size-chart-section {
+        margin-top: 0;
+      }
+      .how-to-measure-placeholder img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 10px 0 20px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #eee;
+      }
+      /* Sizing Tables */
+      .sizing-chart-container table,
+      #racing-suit-size-chart-section table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 0.85em;
+      }
+      .sizing-chart-container th,
+      .sizing-chart-container td,
+      #racing-suit-size-chart-section th,
+      #racing-suit-size-chart-section td {
+        border: 1px solid #ccc;
+        padding: 7px 5px;
+        text-align: center;
+        vertical-align: middle;
+      }
+      .sizing-chart-container th,
+      #racing-suit-size-chart-section th {
+        background-color: var(--input-bg);
+        font-weight: bold;
+        font-size: 0.95em;
+      }
+      .sizing-chart-container th small,
+      #racing-suit-size-chart-section th small {
+        font-weight: normal;
+        font-size: 0.9em;
+        color: #555;
+        display: block;
+        line-height: 1.1;
+      }
+      .sizing-chart-container td:first-child,
+      #racing-suit-size-chart-section td:first-child {
+        font-weight: 600;
+        background-color: #f7f2ec;
+        text-align: left;
+        padding-left: 10px;
+      }
+      /* Product Features */
+      .product-features {
+        margin-top: 25px;
+      }
+      .product-features ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 15px;
+      }
+      .product-features li {
+        margin-bottom: 8px;
+        padding-left: 25px;
+        position: relative;
+        font-size: 0.95em;
+      }
+      .product-features li::before {
+        content: "✔";
+        color: var(--button-green);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+      }
+      .product-features .feature-options {
+        margin-bottom: 15px;
+      }
+      .product-features .feature-options label {
+        display: inline-block;
+        margin-right: 15px;
+        font-weight: normal;
+        margin-bottom: 0;
+      }
+      .product-features input[type="radio"],
+      .product-features input[type="checkbox"] {
+        width: auto;
+        margin-right: 5px;
+        vertical-align: middle;
+        margin-bottom: 0;
+        accent-color: var(--brand-dark-brown);
+      }
+      /* Size/Name Breakdown Table */
+      #size-name-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+      }
+      #size-name-table th,
+      #size-name-table td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+        vertical-align: middle;
+      }
+      #size-name-table th {
+        background-color: var(--brand-dark-brown);
+        color: white;
+        font-size: 0.9em;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      #size-name-table td input[type="text"],
+      #size-name-table td select {
+        margin-bottom: 0;
+        padding: 8px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        font-size: 0.9em;
+        height: 40px;
+      }
+      #size-name-table td select {
+        padding-right: 2em;
+      }
+      #size-name-table td:nth-child(2) input {
+        min-width: 150px;
+      }
+      #size-name-table td:nth-child(5) input {
+        min-width: 100px;
+      }
+      #size-name-table button.remove-row-btn {
+        background-color: transparent;
+        color: var(--remove-red);
+        border: none;
+        padding: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 1.2em;
+        line-height: 1;
+        font-weight: bold;
+        transition: color 0.2s ease;
+      }
+      #size-name-table button.remove-row-btn:hover {
+        color: var(--remove-red-hover);
+      }
+      /* Buttons */
+      button {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease, opacity 0.2s ease;
+        font-weight: 500;
+      }
+      button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+      button#add-size-row-btn {
+        background-color: var(--button-green);
+        color: white;
+        margin-bottom: 20px;
+        display: inline-block;
+      }
+      button#add-size-row-btn:hover {
+        background-color: var(--button-green-hover);
+      }
+      button[type="submit"] {
+        background-color: var(--brand-dark-brown);
+        color: white;
+        display: block;
+        width: 100%;
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+      button[type="submit"]:hover {
+        background-color: #4a2e15;
+      }
+
+      /* --- Mockup AND Vector Upload Area Styling --- */
+      .file-upload-area {
+        /* Common class for styling */
+        background-color: #f9f9f9;
+        border: 2px dashed var(--brand-light-brown);
+        padding: 25px; /* Increased padding */
+        border-radius: 5px;
+        margin-bottom: 25px; /* Increased space */
+        text-align: center;
+      }
+      .file-upload-area h4 {
+        /* Use H4 for upload section titles */
+        font-size: 1.1em;
+        color: var(--brand-dark-brown);
+        margin-bottom: 20px; /* Space below title */
+        border-bottom: none; /* Remove default border */
+        padding-bottom: 0;
+      }
+      .file-upload-area input[type="file"] {
+        display: block;
+        margin: 10px auto 0 auto; /* Center input */
+        max-width: 450px; /* Wider input */
+        border: 1px solid #ccc;
+      }
+      .file-upload-area small {
+        display: block;
+        margin-top: 15px; /* More space for instructions */
+      }
+      /* Mockup Image Preview */
+      #mockup-preview-container {
+        display: none;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+      .mockup-preview-image {
+        display: block;
+        max-width: 150px;
+        max-height: 120px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        object-fit: contain;
+      }
+      /* Vector Logo Filename Preview */
+      #vector-logo-preview-container {
+        display: none; /* Hidden by default */
+        margin-top: 10px;
+        margin-bottom: 15px;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        max-height: 100px; /* Limit height and scroll */
+        overflow-y: auto;
+        text-align: left; /* Align filenames left */
+      }
+      .vector-file-item {
+        font-size: 0.9em;
+        color: #333;
+        padding: 3px 0;
+        border-bottom: 1px dotted #eee;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .vector-file-item:last-child {
+        border-bottom: none;
+      }
+      .vector-file-item::before {
+        /* Add file icon */
+        content: "📎 ";
+        display: inline-block;
+        margin-right: 5px;
+        color: #666;
+      }
+
+      /* Feedback Area Styling */
+      #formFeedback {
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        display: none;
+      }
+      #formFeedback.success {
+        background-color: var(--success-bg);
+        color: var(--success-text);
+        border: 1px solid var(--success-border);
+        display: block;
+      }
+      #formFeedback.error {
+        background-color: var(--error-bg);
+        color: var(--error-text);
+        border: 1px solid var(--error-border);
+        display: block;
+      }
+      .text-center {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="order-form-container">
+      <header class="form-header">
+        <!-- ... Header ... -->
+        <div class="logo">AFA</div>
+        <h1 class="company-name">Al Farhan Apparels</h1>
+        <p class="address">Riyadh, Saudi Arabia</p>
+        <div class="contact-info">
+          <span>+966 53 277 4815</span> <span>alfarhanapparel@gmail.com</span>
+        </div>
+      </header>
+
+      <form
+        id="order-form"
+        action="#"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div id="formFeedback" aria-live="polite"></div>
+        <!-- Customer Info Section -->
+        <section class="form-section">
+          <h2>CUSTOMER INFORMATION</h2>
+          <div class="grid-layout">
+            <!-- ... Customer fields ... -->
+            <div class="form-group">
+              <label for="team-name">TEAM NAME</label
+              ><input type="text" id="team-name" name="teamName" required />
+            </div>
+            <div class="form-group">
+              <label for="contact-name">MAIN CONTACT NAME</label
+              ><input
+                type="text"
+                id="contact-name"
+                name="contactName"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="phone">PHONE NUMBER</label
+              ><input
+                type="tel"
+                id="phone"
+                name="phoneNumber"
+                required
+                pattern="[0-9\s+-]*"
+                title="Please enter a valid phone number"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">EMAIL ADDRESS</label
+              ><input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="city">CITY</label
+              ><input type="text" id="city" name="city" required />
+            </div>
+            <div class="form-group">
+              <label for="address-full"
+                >DELIVERY ADDRESS (Street, Postal Code)</label
+              ><input
+                type="text"
+                id="address-full"
+                name="deliveryAddress"
+                required
+                placeholder="e.g., 123 Main St, Riyadh 11564"
+              />
+            </div>
+            <div class="form-group">
+              <label for="num-items">APPROX. TOTAL ITEMS (All Types)</label
+              ><input
+                type="number"
+                id="num-items"
+                name="numberOfItems"
+                min="1"
+                placeholder="Optional: Estimated total quantity"
+              />
+            </div>
+            <div class="form-group">
+              <label for="deadline">REQUIRED DELIVERY DATE</label
+              ><input
+                type="date"
+                id="deadline"
+                name="deliveryDeadline"
+                required
+              /><small>Please select your desired delivery date.</small>
+            </div>
+          </div>
+        </section>
+
+        <!-- *** MODIFIED: Design Overview Section *** -->
+        <section class="form-section">
+          <h2>DESIGN OVERVIEW</h2>
+
+          <!-- Mockup Upload Area -->
+          <div class="file-upload-area">
+            <!-- Changed class -->
+            <h4>UPLOAD MOCKUP FILE(S)</h4>
+            <div id="mockup-preview-container"></div>
+            <input
+              type="file"
+              id="mockup-file"
+              name="mockupFile[]"
+              accept="image/*,.pdf,.ai,.psd,.eps"
+              multiple
+            />
+            <small>
+              Optional: Upload one or more general mockup files (PDF, AI, PSD,
+              EPS, JPG, PNG).
+              <br />Preview shown for image files. Name files clearly (e.g.,
+              'tshirt-concept.jpg').
+            </small>
+          </div>
+
+          <!-- ** NEW: Vector Logo Upload Area ** -->
+          <div class="file-upload-area">
+            <h4>UPLOAD VECTOR LOGO(S) (Required)</h4>
+            <div id="vector-logo-preview-container">
+              <!-- Vector filename list appears here -->
+            </div>
+            <input
+              type="file"
+              id="vector-logo-files"
+              name="vectorLogoFiles[]"
+              accept=".ai,.eps,.svg,.pdf"
+              required
+              multiple
+            />
+            <!-- Accept only vector types -->
+            <small>
+              <strong style="color: var(--error-text)">REQUIRED:</strong> Please
+              upload all necessary logos in vector format (.ai, .eps, .svg, or
+              .pdf with vectors). <br />Vector logos ensure the best quality for
+              printing and scaling. Name files clearly (e.g., 'main-logo.ai',
+              'sleeve-sponsor.svg').
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="pantone-colors">COLORS (Pantone codes preferred)</label
+            ><textarea
+              id="pantone-colors"
+              name="pantoneColors"
+              rows="3"
+              placeholder="e.g., Pantone 186 C (Red), Pantone Process Blue C, White. Or describe if codes unknown."
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="font-used">FONT USED (If specific)</label
+            ><input
+              type="text"
+              id="font-used"
+              name="fontUsed"
+              placeholder="e.g., Impact, Arial Black. List or ensure fonts are outlined in vector files."
+            />
+          </div>
+        </section>
+
+        <!-- Product Selection & Sizing Section -->
+        <section class="form-section">
+          <!-- ... Content same as before ... -->
+          <h2>PRODUCT SELECTION & SIZING</h2>
+          <div class="product-section-grid">
+            <div class="product-choice-column">
+              <h3>Select Products & Quantities</h3>
+              <div class="product-selection-vertical">
+                <div class="product-item">
+                  <img
+                    src="https://via.placeholder.com/100x100.png?text=T-Shirt"
+                    alt="T-Shirt"
+                  />
+                  <div class="product-label">
+                    <input
+                      type="checkbox"
+                      id="product-tshirt"
+                      name="products[]"
+                      value="T-Shirt"
+                      data-quantity-target="#quantity-tshirt-container"
+                    />
+                    <label for="product-tshirt">T-Shirt</label>
+                  </div>
+                  <div
+                    class="quantity-container"
+                    id="quantity-tshirt-container"
+                  >
+                    <label for="quantity-tshirt">Quantity:</label>
+                    <input
+                      type="number"
+                      id="quantity-tshirt"
+                      name="quantity_tshirt"
+                      min="1"
+                    />
+                  </div>
+                </div>
+                <div class="product-item">
+                  <img
+                    src="https://via.placeholder.com/100x100.png?text=Polo"
+                    alt="Polo Shirt"
+                  />
+                  <div class="product-label">
+                    <input
+                      type="checkbox"
+                      id="product-polo"
+                      name="products[]"
+                      value="Polo Shirt"
+                      data-quantity-target="#quantity-polo-container"
+                    />
+                    <label for="product-polo">Polo Shirt</label>
+                  </div>
+                  <div class="quantity-container" id="quantity-polo-container">
+                    <label for="quantity-polo">Quantity:</label>
+                    <input
+                      type="number"
+                      id="quantity-polo"
+                      name="quantity_polo"
+                      min="1"
+                    />
+                  </div>
+                </div>
+                <div class="product-item">
+                  <img
+                    src="https://via.placeholder.com/100x100.png?text=Quarter+Zip"
+                    alt="Quarter Zip Polo Shirt"
+                  />
+                  <div class="product-label">
+                    <input
+                      type="checkbox"
+                      id="product-quarterzip"
+                      name="products[]"
+                      value="Quarter Zip Polo Shirt"
+                      data-quantity-target="#quantity-quarterzip-container"
+                    />
+                    <label for="product-quarterzip">Quarter Zip</label>
+                  </div>
+                  <div
+                    class="quantity-container"
+                    id="quantity-quarterzip-container"
+                  >
+                    <label for="quantity-quarterzip">Quantity:</label>
+                    <input
+                      type="number"
+                      id="quantity-quarterzip"
+                      name="quantity_quarterzip"
+                      min="1"
+                    />
+                  </div>
+                </div>
+                <div class="product-item">
+                  <img
+                    src="https://via.placeholder.com/100x100.png?text=Racing+Suit"
+                    alt="Racing Suit"
+                  />
+                  <div class="product-label">
+                    <input
+                      type="checkbox"
+                      id="product-racingsuit"
+                      name="products[]"
+                      value="Racing Suit"
+                      data-quantity-target="#quantity-racingsuit-container"
+                    />
+                    <label for="product-racingsuit">Racing Suit</label>
+                  </div>
+                  <div
+                    class="quantity-container"
+                    id="quantity-racingsuit-container"
+                  >
+                    <label for="quantity-racingsuit">Quantity:</label>
+                    <input
+                      type="number"
+                      id="quantity-racingsuit"
+                      name="quantity_racingsuit"
+                      min="1"
+                    />
+                  </div>
+                </div>
+                <div class="product-item">
+                  <img
+                    src="https://via.placeholder.com/100x100.png?text=Hat"
+                    alt="Hat"
+                  />
+                  <div class="product-label">
+                    <input
+                      type="checkbox"
+                      id="product-hats"
+                      name="products[]"
+                      value="Hats"
+                      data-quantity-target="#quantity-hats-container"
+                    />
+                    <label for="product-hats">Hats</label>
+                  </div>
+                  <div class="quantity-container" id="quantity-hats-container">
+                    <label for="quantity-hats">Quantity:</label>
+                    <input
+                      type="number"
+                      id="quantity-hats"
+                      name="quantity_hats"
+                      min="1"
+                    />
+                  </div>
+                </div>
+                <div class="product-item">
+                  <img
+                    src="https://via.placeholder.com/100x100.png?text=Hoodie"
+                    alt="Hoodie"
+                  />
+                  <div class="product-label">
+                    <input
+                      type="checkbox"
+                      id="product-hoodies"
+                      name="products[]"
+                      value="Hoodies"
+                      data-quantity-target="#quantity-hoodies-container"
+                    />
+                    <label for="product-hoodies">Hoodies</label>
+                  </div>
+                  <div
+                    class="quantity-container"
+                    id="quantity-hoodies-container"
+                  >
+                    <label for="quantity-hoodies">Quantity:</label>
+                    <input
+                      type="number"
+                      id="quantity-hoodies"
+                      name="quantity_hoodies"
+                      min="1"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dynamic-size-guide-area">
+              <div id="shirt-size-chart-section" style="display: none">
+                <div class="sizing-chart-container">
+                  <h4>T-Shirt Sizing Chart (Inches)</h4>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Size</th>
+                        <th>1<br /><small>Length</small></th>
+                        <th>2<br /><small>Body</small></th>
+                        <th>3<br /><small>Shoulder</small></th>
+                        <th>5<br /><small>Armhole</small></th>
+                        <th>4<br /><small>Sleeve</small></th>
+                        <th>6<br /><small>Bottom</small></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>XS</td>
+                        <td>26</td>
+                        <td>36</td>
+                        <td>16</td>
+                        <td>7</td>
+                        <td>18</td>
+                        <td>12</td>
+                      </tr>
+                      <tr>
+                        <td>S</td>
+                        <td>27</td>
+                        <td>38</td>
+                        <td>16</td>
+                        <td>7.5</td>
+                        <td>18</td>
+                        <td>13</td>
+                      </tr>
+                      <tr>
+                        <td>M</td>
+                        <td>28</td>
+                        <td>40</td>
+                        <td>17</td>
+                        <td>7.5</td>
+                        <td>18</td>
+                        <td>13</td>
+                      </tr>
+                      <tr>
+                        <td>L</td>
+                        <td>29</td>
+                        <td>42</td>
+                        <td>18</td>
+                        <td>8.5</td>
+                        <td>19</td>
+                        <td>14</td>
+                      </tr>
+                      <tr>
+                        <td>XL</td>
+                        <td>29</td>
+                        <td>44</td>
+                        <td>18.5</td>
+                        <td>10</td>
+                        <td>20</td>
+                        <td>15</td>
+                      </tr>
+                      <tr>
+                        <td>2XL</td>
+                        <td>30</td>
+                        <td>46</td>
+                        <td>19</td>
+                        <td>10</td>
+                        <td>20</td>
+                        <td>15</td>
+                      </tr>
+                      <tr>
+                        <td>3XL</td>
+                        <td>31</td>
+                        <td>48</td>
+                        <td>19.5</td>
+                        <td>10.5</td>
+                        <td>21</td>
+                        <td>16</td>
+                      </tr>
+                      <tr>
+                        <td>4XL</td>
+                        <td>33</td>
+                        <td>50</td>
+                        <td>20</td>
+                        <td>11</td>
+                        <td>22</td>
+                        <td>16</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="product-features">
+                  <h4>Standard Features</h4>
+                  <div class="feature-options form-group">
+                    <label
+                      >Sleeve Length (Default - Confirm if different
+                      needed):</label
+                    >
+                    <input
+                      type="radio"
+                      id="sleeve-short"
+                      name="sleeveLength"
+                      value="short"
+                      checked
+                      required
+                    />
+                    <label for="sleeve-short">Short Sleeve</label>
+                    <input
+                      type="radio"
+                      id="sleeve-long"
+                      name="sleeveLength"
+                      value="long"
+                      required
+                    />
+                    <label for="sleeve-long">Long Sleeve</label>
+                  </div>
+                  <ul>
+                    <li>
+                      Material: 80% Polyester, 20% Cotton Blend (Standard)
+                    </li>
+                    <li>Style: Dry Fit Available</li>
+                  </ul>
+                </div>
+              </div>
+              <div id="racing-suit-size-chart-section" style="display: none">
+                <h4>Racing Suit Sizing & Measurement (cm)</h4>
+                <div class="how-to-measure-placeholder">
+                  <img
+                    src="https://via.placeholder.com/600x200/eee/777?text=How+to+Measure+Guide+(Replace+This)"
+                    alt="How to measure guide placeholder"
+                  />
+                </div>
+                <h5>Unisex / Women's Sizes</h5>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Size</th>
+                      <th>XS</th>
+                      <th>S</th>
+                      <th>M</th>
+                      <th>L</th>
+                      <th>XL</th>
+                      <th>XXL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Int' Sizes</td>
+                      <td>32 - 34</td>
+                      <td>36 - 38</td>
+                      <td>40 - 42</td>
+                      <td>44 - 46</td>
+                      <td>48 - 50</td>
+                      <td>52 - 54</td>
+                    </tr>
+                    <tr>
+                      <td>Total Length</td>
+                      <td>168</td>
+                      <td>168</td>
+                      <td>168</td>
+                      <td>168</td>
+                      <td>168</td>
+                      <td>168</td>
+                    </tr>
+                    <tr>
+                      <td>Chest</td>
+                      <td>80</td>
+                      <td>88</td>
+                      <td>96</td>
+                      <td>104</td>
+                      <td>114</td>
+                      <td>124</td>
+                    </tr>
+                    <tr>
+                      <td>Waist</td>
+                      <td>70</td>
+                      <td>78</td>
+                      <td>86</td>
+                      <td>94</td>
+                      <td>104</td>
+                      <td>114</td>
+                    </tr>
+                    <tr>
+                      <td>Hip</td>
+                      <td>86</td>
+                      <td>94</td>
+                      <td>102</td>
+                      <td>110</td>
+                      <td>118</td>
+                      <td>126</td>
+                    </tr>
+                    <tr>
+                      <td>Arm</td>
+                      <td>59</td>
+                      <td>60</td>
+                      <td>61</td>
+                      <td>61</td>
+                      <td>62</td>
+                      <td>62</td>
+                    </tr>
+                    <tr>
+                      <td>Side Length</td>
+                      <td>106</td>
+                      <td>106</td>
+                      <td>106</td>
+                      <td>106</td>
+                      <td>106</td>
+                      <td>106</td>
+                    </tr>
+                    <tr>
+                      <td>Inner Leg</td>
+                      <td>82</td>
+                      <td>81</td>
+                      <td>80</td>
+                      <td>79</td>
+                      <td>78</td>
+                      <td>77</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h5>Men's Regular Sizes</h5>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Size</th>
+                      <th>S</th>
+                      <th>M</th>
+                      <th>L</th>
+                      <th>XL</th>
+                      <th>XXL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Int' Sizes</td>
+                      <td>44</td>
+                      <td>46 - 48</td>
+                      <td>50 - 52</td>
+                      <td>54 - 56</td>
+                      <td>58 - 60</td>
+                    </tr>
+                    <tr>
+                      <td>Total Length</td>
+                      <td>168</td>
+                      <td>171 - 174</td>
+                      <td>177 - 180</td>
+                      <td>182 - 184</td>
+                      <td>186 - 188</td>
+                    </tr>
+                    <tr>
+                      <td>Chest</td>
+                      <td>88</td>
+                      <td>96</td>
+                      <td>104</td>
+                      <td>114</td>
+                      <td>124</td>
+                    </tr>
+                    <tr>
+                      <td>Waist</td>
+                      <td>78</td>
+                      <td>86</td>
+                      <td>94</td>
+                      <td>104</td>
+                      <td>114</td>
+                    </tr>
+                    <tr>
+                      <td>Hip</td>
+                      <td>94</td>
+                      <td>102</td>
+                      <td>110</td>
+                      <td>118</td>
+                      <td>126</td>
+                    </tr>
+                    <tr>
+                      <td>Arm</td>
+                      <td>63</td>
+                      <td>64</td>
+                      <td>64</td>
+                      <td>65</td>
+                      <td>66</td>
+                    </tr>
+                    <tr>
+                      <td>Side Length</td>
+                      <td>106</td>
+                      <td>109</td>
+                      <td>112</td>
+                      <td>115</td>
+                      <td>118</td>
+                    </tr>
+                    <tr>
+                      <td>Inner Leg</td>
+                      <td>82</td>
+                      <td>84</td>
+                      <td>86</td>
+                      <td>88</td>
+                      <td>90</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <small style="margin-top: 15px"
+                  >Please refer to the 'How to Measure' guide and select sizes
+                  carefully. Contact us if you have questions.</small
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sizes & Name Breakdown Section -->
+        <section class="form-section">
+          <!-- ... Content same as before ... -->
+          <h2>SIZES & NAME/NUMBER BREAKDOWN</h2>
+          <p>
+            List each person/item below. For each, select the **Product Type**,
+            the **Fit/Gender** (especially for Racing Suits), and the **Size**.
+            <br />Use the relevant size chart(s) shown above for reference when
+            selecting the size. Choose 'Other' size if necessary and explain in
+            the Notes section.
+          </p>
+          <div style="overflow-x: auto">
+            <table id="size-name-table">
+              <thead>
+                <tr>
+                  <th>Product Type</th>
+                  <th>Full Name / Identifier</th>
+                  <th>Fit/Gender</th>
+                  <th>Size</th>
+                  <th>Number / Role (Optional)</th>
+                  <th style="width: 50px">Action</th>
+                </tr>
+              </thead>
+              <tbody id="size-name-tbody">
+                <tr>
+                  <td>
+                    <select name="itemProductType[]" required>
+                      <option value="">--Select Product--</option>
+                      <option value="T-Shirt">T-Shirt</option>
+                      <option value="Polo Shirt">Polo Shirt</option>
+                      <option value="Quarter Zip Polo Shirt">
+                        Quarter Zip Polo Shirt
+                      </option>
+                      <option value="Racing Suit">Racing Suit</option>
+                      <option value="Hats">Hats</option>
+                      <option value="Hoodies">Hoodies</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="itemFullName[]"
+                      placeholder="e.g., John Doe or 'Extra Logo Shirt'"
+                      required
+                    />
+                  </td>
+                  <td>
+                    <select name="itemFitGender[]" required>
+                      <option value="">--Select Fit--</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Unisex">Unisex/Default</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="itemSize[]" required>
+                      <option value="">--Select Size--</option>
+                      <option value="XS">XS</option>
+                      <option value="S">S</option>
+                      <option value="M">M</option>
+                      <option value="L">L</option>
+                      <option value="XL">XL</option>
+                      <option value="XXL">XXL</option>
+                      <option value="2XL">2XL</option>
+                      <option value="3XL">3XL</option>
+                      <option value="4XL">4XL</option>
+                      <option value="Other">Other (Specify in Notes)</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="itemRole[]"
+                      placeholder="e.g., #10, Coach"
+                    />
+                  </td>
+                  <td class="text-center">
+                    <button
+                      type="button"
+                      class="remove-row-btn"
+                      onclick="removeSizeRow(this)"
+                      title="Remove this row"
+                    >
+                      &times;
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button type="button" id="add-size-row-btn">+ Add Row</button>
+        </section>
+
+        <!-- Additional Notes Section -->
+        <section class="form-section">
+          <h2>ADDITIONAL NOTES</h2>
+          <div class="form-group">
+            <label for="notes"
+              >Any specific instructions, questions, or details about sizing
+              (esp. for non-TShirt items or 'Other' size)?</label
+            ><textarea
+              id="notes"
+              name="notes"
+              rows="4"
+              placeholder="E.g., Placement details, material requests, specific measurements..."
+            ></textarea>
+          </div>
+        </section>
+
+        <!-- Submission Button -->
+        <button type="submit" id="submit-button">Submit Order Request</button>
+      </form>
+    </div>
+
+    <script>
+      // --- Apps Script Deployed URL ---
+      //const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGWxKwOWW_UQCisNoD8xctQAfwluDzKV2B15eq__1ufDt-fxlVbWcg39amKqXVhHAK2A/exec"; // Replace if needed
+      const SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbxWZeJgMmA-nMxQRkxLY0dLyfB9ONsHi4Bn2JuD2jxsCaNUGJpuIXGHr_4TKC3yCvMIfg/exec"; // Replace if needed
+
+      // --- DOM References ---
+      const orderForm = document.getElementById("order-form");
+      const feedbackDiv = document.getElementById("formFeedback");
+      const submitButton = document.getElementById("submit-button");
+      // Breakdown Table
+      const addRowButton = document.getElementById("add-size-row-btn");
+      const tableBody = document.getElementById("size-name-tbody");
+      // Product Selection
+      const productCheckboxes = orderForm.querySelectorAll(
+        'input[type="checkbox"][name="products[]"]'
+      );
+      // File Inputs & Previews
+      const mockupFileInput = document.getElementById("mockup-file");
+      const mockupPreviewContainer = document.getElementById(
+        "mockup-preview-container"
+      );
+      const vectorLogoInput = document.getElementById("vector-logo-files"); // *** NEW ***
+      const vectorLogoPreviewContainer = document.getElementById(
+        "vector-logo-preview-container"
+      ); // *** NEW ***
+      // Size Chart Sections
+      const shirtSizeChartSection = document.getElementById(
+        "shirt-size-chart-section"
+      );
+      const racingSuitSizeChartSection = document.getElementById(
+        "racing-suit-size-chart-section"
+      );
+      const tshirtCheckbox = document.getElementById("product-tshirt");
+      const poloCheckbox = document.getElementById("product-polo");
+      const quarterzipCheckbox = document.getElementById("product-quarterzip");
+      const racingsuitCheckbox = document.getElementById("product-racingsuit");
+
+      // --- Update Visible Size Charts ---
+      function updateVisibleSizeCharts() {
+        try {
+          const showShirtChart =
+            tshirtCheckbox.checked ||
+            poloCheckbox.checked ||
+            quarterzipCheckbox.checked;
+          shirtSizeChartSection.style.display = showShirtChart
+            ? "block"
+            : "none";
+          const showRacingSuitChart = racingsuitCheckbox.checked;
+          racingSuitSizeChartSection.style.display = showRacingSuitChart
+            ? "block"
+            : "none";
+        } catch (error) {
+          console.error("Error updating size charts:", error);
+        }
+      }
+
+      // --- Handle Product Checkbox Change (Quantity & Size Chart) ---
+      const handleCheckboxChange = (event) => {
+        /* Code same as previous */ const checkbox = event.target;
+        const quantityContainerSelector = checkbox.getAttribute(
+          "data-quantity-target"
+        );
+        if (!quantityContainerSelector) return;
+        const quantityContainer = orderForm.querySelector(
+          quantityContainerSelector
+        );
+        const quantityInput = quantityContainer
+          ? quantityContainer.querySelector('input[type="number"]')
+          : null;
+        if (quantityContainer && quantityInput) {
+          if (checkbox.checked) {
+            quantityContainer.style.display = "block";
+            quantityInput.required = true;
+            quantityInput.min = "1";
+            if (!quantityInput.value || parseInt(quantityInput.value) < 1)
+              quantityInput.value = 1;
+          } else {
+            quantityContainer.style.display = "none";
+            quantityInput.required = false;
+            quantityInput.value = "";
+          }
+        }
+        updateVisibleSizeCharts();
+      };
+      productCheckboxes.forEach((checkbox) =>
+        checkbox.addEventListener("change", handleCheckboxChange)
+      );
+
+      // --- Handle File Preview ---
+      function handleFilePreview(fileInput, previewContainer, isImagePreview) {
+        previewContainer.innerHTML = ""; // Clear previous
+        previewContainer.style.display = "none"; // Hide initially
+        const files = fileInput.files;
+
+        if (files && files.length > 0) {
+          previewContainer.style.display = isImagePreview ? "flex" : "block"; // Show container
+          for (const file of files) {
+            if (isImagePreview && file.type.startsWith("image/")) {
+              const reader = new FileReader();
+              reader.onload = function (e) {
+                const img = document.createElement("img");
+                img.src = e.target.result;
+                img.alt = `Preview: ${file.name}`;
+                img.classList.add("mockup-preview-image");
+                previewContainer.appendChild(img);
+              };
+              reader.onerror = (e) => {
+                console.error("FileReader error:", e);
+              };
+              reader.readAsDataURL(file);
+            } else if (!isImagePreview) {
+              // List filename for non-image preview (vectors)
+              const fileItem = document.createElement("div");
+              fileItem.classList.add("vector-file-item");
+              fileItem.textContent = `${file.name}`;
+              fileItem.title = `${file.name} (${(file.size / 1024).toFixed(
+                1
+              )} KB)`; // Add title attribute for size
+              previewContainer.appendChild(fileItem);
+            } else if (isImagePreview) {
+              // Mockup area, non-image file selected
+              const fileInfo = document.createElement("div");
+              fileInfo.textContent = `📎 ${file.name} (No preview)`;
+              fileInfo.style.fontSize = "0.8em";
+              fileInfo.style.padding = "5px";
+              fileInfo.style.maxWidth = "150px";
+              fileInfo.style.overflow = "hidden";
+              fileInfo.style.textOverflow = "ellipsis";
+              fileInfo.style.whiteSpace = "nowrap";
+              previewContainer.appendChild(fileInfo);
+            }
+          }
+        }
+      }
+      mockupFileInput.addEventListener("change", () =>
+        handleFilePreview(mockupFileInput, mockupPreviewContainer, true)
+      );
+      vectorLogoInput.addEventListener("change", () =>
+        handleFilePreview(vectorLogoInput, vectorLogoPreviewContainer, false)
+      ); // *** NEW Listener ***
+
+      // --- Size/Name Table Logic ---
+      function addSizeRow() {
+        /* Code same as previous */ const newRow = tableBody.insertRow();
+        newRow.innerHTML = `<td><select name="itemProductType[]" required><option value="">--Select Product--</option><option value="T-Shirt">T-Shirt</option><option value="Polo Shirt">Polo Shirt</option><option value="Quarter Zip Polo Shirt">Quarter Zip Polo Shirt</option><option value="Racing Suit">Racing Suit</option><option value="Hats">Hats</option><option value="Hoodies">Hoodies</option></select></td><td><input type="text" name="itemFullName[]" placeholder="e.g., Jane Smith or 'Spare'" required></td><td><select name="itemFitGender[]" required><option value="">--Select Fit--</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex/Default</option></select></td><td><select name="itemSize[]" required><option value="">--Select Size--</option><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option><option value="2XL">2XL</option><option value="3XL">3XL</option><option value="4XL">4XL</option><option value="Other">Other (Specify in Notes)</option></select></td><td><input type="text" name="itemRole[]" placeholder="e.g., #7, Captain"></td><td class="text-center"><button type="button" class="remove-row-btn" onclick="removeSizeRow(this)" title="Remove this row">×</button></td>`;
+      }
+      function removeSizeRow(button) {
+        /* Code same as previous */ const rowToRemove = button.closest("tr");
+        if (rowToRemove && tableBody.rows.length > 1) {
+          tableBody.removeChild(rowToRemove);
+        } else if (tableBody.rows.length === 1) {
+          alert("You must have at least one item in the breakdown.");
+        }
+      }
+      addRowButton.addEventListener("click", addSizeRow);
+
+      // --- Form Submission ---
+      orderForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        feedbackDiv.className = "";
+        feedbackDiv.textContent = "";
+        feedbackDiv.style.display = "none";
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+
+        // --- Frontend Validation ---
+        let productSelected = false;
+        productCheckboxes.forEach((cb) => {
+          if (cb.checked) productSelected = true;
+        });
+        if (!productSelected) {
+          showFeedback("error", "Please select at least one product type.");
+          const fp = orderForm.querySelector(
+            '.product-item input[type="checkbox"]'
+          );
+          if (fp) {
+            fp.focus();
+            fp.closest(".form-section").scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+          return;
+        }
+        if (tableBody.rows.length === 0) {
+          showFeedback(
+            "error",
+            "Please add at least one person/item to the Size Breakdown section."
+          );
+          tableBody.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+        // *** MODIFIED Validation: Check BOTH file inputs ***
+        if (
+          mockupFileInput.files.length === 0 &&
+          vectorLogoInput.files.length === 0
+        ) {
+          // Require at least one file in total
+          showFeedback(
+            "error",
+            "Please upload at least one mockup file OR vector logo file."
+          );
+          mockupFileInput.focus(); // Focus on first one
+          mockupFileInput
+            .closest(".form-section")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+        if (vectorLogoInput.required && vectorLogoInput.files.length === 0) {
+          // Specifically check required vector input
+          showFeedback(
+            "error",
+            "Vector Logo upload is required. Please upload at least one vector logo file (.ai, .eps, .svg, .pdf)."
+          );
+          vectorLogoInput.focus();
+          vectorLogoInput
+            .closest(".file-upload-area")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+        // --- End Validation ---
+
+        // --- Prepare Data for Apps Script ---
+        const formData = new FormData(orderForm);
+        const dataToSend = {};
+
+        // Convert FormData fields (non-files)
+        for (let [key, value] of formData.entries()) {
+          if (!(value instanceof File)) {
+            // Exclude files here
+            if (key.endsWith("[]")) {
+              let cleanKey = key.substring(0, key.length - 2);
+              if (!dataToSend[cleanKey]) dataToSend[cleanKey] = [];
+              dataToSend[cleanKey].push(value);
+            } else {
+              dataToSend[key] = value;
+            }
+          }
+        }
+
+        // --- Handle File Uploads (Mockups + Vectors) ---
+        const mockupFiles = mockupFileInput.files;
+        const vectorFiles = vectorLogoInput.files;
+        const allFilePromises = []; // Combined array for all promises
+
+        const readFileAsBase64 = (file) => {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const base64Data = e.target.result.split(",")[1];
+              resolve({
+                fileName: file.name,
+                mimeType: file.type,
+                base64Data: base64Data,
+              });
+            };
+            reader.onerror = (e) => {
+              console.error("FileReader error:", e);
+              reject(new Error(`Error reading ${file.name}`));
+            };
+            reader.readAsDataURL(file);
+          });
+        };
+
+        // Add mockup file read promises
+        if (mockupFiles.length > 0) {
+          for (const file of mockupFiles) {
+            allFilePromises.push(readFileAsBase64(file));
+          }
+        }
+        // Add vector file read promises
+        if (vectorFiles.length > 0) {
+          for (const file of vectorFiles) {
+            allFilePromises.push(readFileAsBase64(file));
+          }
+        }
+
+        // Wait for ALL files to be read
+        Promise.all(allFilePromises)
+          .then((allFileResults) => {
+            // Separate results back based on original input length
+            const numMockupFiles = mockupFiles.length;
+            dataToSend.mockupFiles = allFileResults.slice(0, numMockupFiles);
+            dataToSend.vectorLogoFiles = allFileResults.slice(numMockupFiles);
+
+            console.log("Data ready to send:", dataToSend); // Log before sending
+            sendDataToScript(dataToSend); // Send combined data
+          })
+          .catch((error) => {
+            console.error("Error reading files:", error);
+            showFeedback(
+              "error",
+              `Error processing files: ${error.message}. Please try again.`
+            );
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit Order Request";
+          });
+      }); // <<< END of the 'submit' event listener function
+
+      // --- Function to Send Data to Apps Script ---
+      function sendDataToScript(data) {
+        if (
+          !SCRIPT_URL ||
+          SCRIPT_URL === "PASTE_YOUR_COPIED_WEB_APP_URL_HERE"
+        ) {
+          showFeedback("error", "SCRIPT_URL is not configured.");
+          return;
+        }
+        fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        })
+          .then((res) => {
+            if (!res.ok) {
+              return res.text().then((text) => {
+                throw new Error(
+                  `Server Error: ${res.status} ${res.statusText} - ${text}`
+                );
+              });
+            }
+            return res.json();
+          })
+          .then((response) => {
+            console.log("Apps Script Response:", response);
+            if (response.result === "success") {
+              showFeedback("success", "Order Request Submitted Successfully!");
+              orderForm.reset();
+              // Reset breakdown table
+              while (tableBody.rows.length > 1) tableBody.deleteRow(1);
+              const firstRowInputs =
+                tableBody.rows[0]?.querySelectorAll("input, select");
+              firstRowInputs?.forEach((input) => {
+                input.value = "";
+                input.selectedIndex = 0;
+              });
+              // Reset product checkboxes and quantities
+              productCheckboxes.forEach((checkbox) => {
+                checkbox.checked = false;
+                handleCheckboxChange({ target: checkbox });
+              });
+              // Reset file previews
+              mockupPreviewContainer.innerHTML = "";
+              mockupPreviewContainer.style.display = "none";
+              vectorLogoPreviewContainer.innerHTML = "";
+              vectorLogoPreviewContainer.style.display = "none";
+              // Reset size charts
+              updateVisibleSizeCharts();
+            } else {
+              showFeedback(
+                "error",
+                `Submission Failed: ${
+                  response.message || "Unknown error from script."
+                }`
+              );
+            }
+          })
+          .catch((error) => {
+            console.error("Error sending data:", error);
+            showFeedback(
+              "error",
+              `Submission Failed: Network or script error. (${error.message})`
+            );
+          })
+          .finally(() => {
+            // Ensure button is re-enabled if needed (primarily handled by showFeedback)
+            if (
+              submitButton.disabled &&
+              !feedbackDiv.classList.contains("success")
+            ) {
+              submitButton.disabled = false;
+              submitButton.textContent = "Submit Order Request";
+            }
+          });
+      }
+
+      // --- Utility Functions ---
+      function showFeedback(type, message) {
+        /* ... function code same as before ... */ feedbackDiv.className = "";
+        feedbackDiv.classList.add(type);
+        feedbackDiv.textContent = message;
+        feedbackDiv.style.display = "block";
+        feedbackDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (type === "error") {
+          submitButton.disabled = false;
+          submitButton.textContent = "Submit Order Request";
+        }
+      }
+
+      // --- Initial Setup on Load ---
+      document.addEventListener("DOMContentLoaded", () => {
+        updateVisibleSizeCharts();
+      });
+    </script>
+  </body>
+</html>
