@@ -11,11 +11,12 @@
         "https://script.google.com/macros/s/AKfycbw7sWrxgrxG576NQccKh2VEZP5swxK_kF5FonXHls6PXdy4pd61RKn6qcA0poiR_zhAug/exec"; // Replace with your web app URL
 
       function sendTest() {
-        getJSON(SCRIPT_URL, {
+        fetch(SCRIPT_URL, {
+          redirect: "follow",
           method: "POST",
-          mode: "cors",
+
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "text/plain;charset=utf-8",
           },
           body: JSON.stringify({ name: "Sazzad" }),
         })
