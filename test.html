@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test Fetch</title>
+  </head>
+  <body>
+    <button onclick="sendTest()">Send Test Fetch</button>
+
+    <script>
+      const SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbw7ajQWkQolyhdU93_HbuqJGtB4qU8L_VW7gyWxxrKEkQd4r5wXhCWsUm6AjTSrln4_Mg/exec"; // Replace with your web app URL
+
+      function sendTest() {
+        fetch(SCRIPT_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: "Sazzad" }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            alert("Response: " + data.message);
+            console.log("Success:", data);
+          })
+          .catch((err) => {
+            console.error("Fetch error:", err);
+            alert("Fetch failed. See console.");
+          });
+      }
+    </script>
+  </body>
+</html>
