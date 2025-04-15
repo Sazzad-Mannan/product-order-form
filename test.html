@@ -11,8 +11,9 @@
         "https://script.google.com/macros/s/AKfycbw7sWrxgrxG576NQccKh2VEZP5swxK_kF5FonXHls6PXdy4pd61RKn6qcA0poiR_zhAug/exec"; // Replace with your web app URL
 
       function sendTest() {
-        fetch(SCRIPT_URL, {
+        getJSON(SCRIPT_URL, {
           method: "POST",
+          mode: "cors",
           headers: {
             "Content-Type": "application/json",
           },
